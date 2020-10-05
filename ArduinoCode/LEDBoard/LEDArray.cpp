@@ -28,12 +28,12 @@ LEDArray::LEDArray(int numCols, int numRows, int numPorts, int ledsPerPort){
 //deletes the allocated memory for its arrays
 LEDArray::~LEDArray(){
   for(int i = 0; i < numRows_; i++){
-    delete ledInputArray[i];
+    delete[] ledInputArray[i];
   }
-  delete ledInputArray;
+  delete[] ledInputArray;
   ledInputArray = NULL;
 
-  delete ledOutputArray_;
+  delete[] ledOutputArray_;
   ledOutputArray_ = NULL;
 }
 
@@ -129,5 +129,80 @@ void LEDArray::updateOutputArray_(){
     }
   }
 }
+
+
+
+
+LEDAnimation::LEDAnimation(int numRows, int numCols, int numFrames, int refreshRate){
+
+  numFrames_ = numFrames;
+  refreshRate_ = refreshRate;
+
+  numRows_ = numRows;
+  numCols_ = numCols;
+
+  frameArray_ = new CRGB** [numFrames_];
+
+  for(int i = 0; i < numFrames_; i++){
+    frameArray_[i] = new CRGB* [numRows_];
+    for(int j = 0; j < numRows_; j++){
+      frameArray_[i][j] = new CRGB[numCols_];
+    }
+  }
+}
+
+
+
+LEDAnimation::~LEDAnimation(){
+
+  for(int i = 0; i < numFrames_; i++){
+    for(int j = 0; j < numRows_; j++){
+      delete[] frameArray_[i][j];
+    }
+    delete[] frameArray_[i];
+    frameArray_[i] = NULL;
+  }
+  delete[] frameArray_;
+  frameArray_ = NULL;
+
+}
+
+void LEDAnimation::addPixle(int frameNum, int row, int col, CRGB data){
+
+  if(frameNum < numFrames_ && row < numRows_ && col < numCols_){
+    frameArray_[frameNum][row][col] = data;
+  }
+}
+
+int LEDAnimation::getNumFrames(){
+  return numFrames_;
+}
+
+int LEDAnimation::getRefreshRate(){
+  return refreshRate_;
+}
+
+void LEDAnimation::printFrames(){
+
+  Serial.println("-------------");
+  for(int i = 0; i < numFrames_; i++){
+    for(int j = 0; j < numRows_; j++){
+      for(int k = 0; k < numCols_; k++){
+        Serial.print("|");
+        Serial.print(frameArray_[i][j][k].red);
+        Serial.print(" ");
+        Serial.print(frameArray_[i][j][k].green);
+        Serial.print(" ");
+        Serial.print(frameArray_[i][j][k].blue);
+        Serial.print("|");
+        Serial.print(" ");
+      }
+      Serial.println();
+    }
+    Serial.println("-------------");
+  }
+
+}
+
 
 #endif
