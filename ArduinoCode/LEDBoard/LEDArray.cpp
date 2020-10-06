@@ -140,7 +140,7 @@ LEDAnimation::LEDAnimation(int numRows, int numCols, int numFrames, int refreshR
 
   numRows_ = numRows;
   numCols_ = numCols;
-
+/*
   frameArray_ = new CRGB** [numFrames_];
 
   for(int i = 0; i < numFrames_; i++){
@@ -148,13 +148,13 @@ LEDAnimation::LEDAnimation(int numRows, int numCols, int numFrames, int refreshR
     for(int j = 0; j < numRows_; j++){
       frameArray_[i][j] = new CRGB[numCols_];
     }
-  }
+  }*/
 }
 
 
 
 LEDAnimation::~LEDAnimation(){
-
+/*
   for(int i = 0; i < numFrames_; i++){
     for(int j = 0; j < numRows_; j++){
       delete[] frameArray_[i][j];
@@ -164,7 +164,7 @@ LEDAnimation::~LEDAnimation(){
   }
   delete[] frameArray_;
   frameArray_ = NULL;
-
+*/
 }
 
 void LEDAnimation::addPixle(int frameNum, int row, int col, CRGB data){

@@ -11,6 +11,7 @@
 #define LED_ARRAY_CONTROL_HPP
 
 #include "Arduino.h"
+#include "LEDBoard.h"
 #include "LEDArray.h"
 
 

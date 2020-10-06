@@ -10,6 +10,7 @@
 #define SD_CARD_CONTROL_HPP
 
 #include "Arduino.h"
+#include "LEDBoard.h"
 
 #define SD_DEBUG 1
 
@@ -26,14 +27,14 @@ void sdCardInit(){
   if(SD_DEBUG) Serial.print("Initializing SD card...");
 
   if (!SD.begin(chipSelect)) {
-    Serial.println("initialization failed!");
+    if(SD_DEBUG) Serial.println("initialization failed!");
     return;
   }
-  Serial.println("initialization done.");
+  if(SD_DEBUG) Serial.println("initialization done.");
 
 }
 
-void sdCardTest(){
+void sdCardTest(LEDAnimation &animation){
 
   if(SD_DEBUG) Serial.print("Initializing SD card...");
 
@@ -43,71 +44,71 @@ void sdCardTest(){
   }
   Serial.println("initialization done.");
 
+  String buffer = "";
+  int linePos = 0;
+  int numFrames = 0;
+  int refreshRate = 0;
+  int numRows = 0;
+  int numCols = 0;
+
   inFile = SD.open("Test.txt");
   if (inFile) {
 
     Serial.println("Input.txt");
 
-    String buffer = "";
-    int pos = 0;
-    int numFrames = 0;
-    int refreshRate = 0;
-    int numRows = 0;
-    int numCols = 0;
-    int frameNum = 0;
+    //read numFrames
+    buffer = inFile.readStringUntil('\n');
+    linePos = buffer.indexOf(":");
+    numFrames = buffer.substring(linePos + 1, buffer.length()).toInt();
 
-    while (inFile.available()) {
+    //read refreshRate
+    buffer = inFile.readStringUntil('\n');
+    linePos = buffer.indexOf(":");
+    refreshRate = buffer.substring(linePos + 1, buffer.length()).toInt();
 
-      buffer = inFile.readStringUntil('\n');
+    //read numRows
+    buffer = inFile.readStringUntil('\n');
+    linePos = buffer.indexOf(":");
+    numRows = buffer.substring(linePos + 1, buffer.length()).toInt();
 
-      if(buffer == "END_HEADER"){break;}
+    //read numCols
+    buffer = inFile.readStringUntil('\n');
+    linePos = buffer.indexOf(":");
+    numCols = buffer.substring(linePos + 1, buffer.length()).toInt();
 
-      pos = buffer.indexOf(":");
+    //read END_HEADER
+    inFile.readStringUntil('\n');
 
-      if(pos == -1){break;}
+    Serial.print("numFrames:");
+    Serial.println(numFrames);
+    Serial.print("refreshRate:");
+    Serial.println(refreshRate);
+    Serial.print("numRows:");
+    Serial.println(numRows);
+    Serial.print("numCols:");
+    Serial.println(numCols);
 
-      if(buffer.substring(0, pos) == "numFrames"){
-        numFrames = buffer.substring(pos + 1, buffer.length()).toInt();
+    //animation.setNumFrames(numFrames);
+
+    for(int i = 0; i < numFrames; i++){
+      //read frame number line
+      inFile.readStringUntil('\n');
+      for(int j = 0; j < numRows; j++){
+        buffer = inFile.readStringUntil('\n');
+        for(int k = 0; k < numCols; k++){
+          linePos = buffer.indexOf(",");
+          char charBuffer[linePos+1];
+          buffer.substring(0, linePos).toCharArray(charBuffer, linePos+1);
+          animation.addPixle(i, j, k, strtol(charBuffer, NULL, 16));
+          buffer = buffer.substring(linePos + 1, buffer.length());
+        }
       }
-      else if(buffer.substring(0, pos) == "refreshRate"){
-        refreshRate = buffer.substring(pos + 1, buffer.length()).toInt();
-      }
-      else if(buffer.substring(0, pos) == "numRows"){
-        numRows = buffer.substring(pos + 1, buffer.length()).toInt();
-      }
-      else if(buffer.substring(0, pos) == "numCols"){
-        numCols = buffer.substring(pos + 1, buffer.length()).toInt();
-      }
-
-      Serial.print("numFrames:");
-      Serial.println(numFrames);
-      Serial.print("refreshRate:");
-      Serial.println(refreshRate);
-      Serial.print("numRows:");
-      Serial.println(numRows);
-      Serial.print("numCols:");
-      Serial.println(numCols);
-
-
-    }
-
-    while (inFile.available()) {
-
-      buffer = inFile.readStringUntil('\n');
-
-      if(buffer.indexOf("frame:") == 0){
-          frameNum = buffer.substring(pos + 1, buffer.length()).toInt();
-      }
-      for(int i = 0; i < numRows; i++){
-        //add in code to get values from file for leds
-      }
-
-
     }
 
     // close the file:
     inFile.close();
-  } else {
+  }
+  else {
     // if the file didn't open, print an error:
     Serial.println("error opening Input.txt");
   }

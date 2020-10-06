@@ -10,10 +10,18 @@
 #ifndef ANIMATION_CONTROL_HPP
 #define ANIMATION_CONTROL_HPP
 
+#define MAX_NUM_FRAMES 4
 
 #include "Arduino.h"
+#include "LEDBoard.h"
 
+LEDAnimation animation(LED_ARRAY_NUM_ROWS, LED_ARRAY_NUM_COLS, MAX_NUM_FRAMES, 0);
 
+void loadAnimation(){
+  animation.printFrames();
+  //sdCardTest(animation);
+  //animation.printFrames();
+}
 
 
 #endif

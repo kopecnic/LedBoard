@@ -1,8 +1,8 @@
+#include "LEDBoard.h"
 #include "ledArrayControl.hpp"
 #include "spectrumAnalyzer.hpp"
 #include "sdCardControl.hpp"
-
-#define WAIT_FOR_SERIAL 1
+#include "animationControl.hpp"
 
 void setup() {
   // put your setup code here, to run once:
@@ -17,7 +17,7 @@ void setup() {
 
  ledArrayInit();
  //sdCardInit();
- sdCardTest();
+ loadAnimation();
  //spectrumAnalyzerInit();
 }
 
