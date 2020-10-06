@@ -88,7 +88,8 @@ void sdCardTest(LEDAnimation &animation){
     Serial.print("numCols:");
     Serial.println(numCols);
 
-    //animation.setNumFrames(numFrames);
+    animation.setRefreshRate(refreshRate);
+    animation.setNumFrames(numFrames);
 
     for(int i = 0; i < numFrames; i++){
       //read frame number line

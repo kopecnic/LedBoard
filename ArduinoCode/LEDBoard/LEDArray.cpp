@@ -14,27 +14,13 @@ LEDArray::LEDArray(int numCols, int numRows, int numPorts, int ledsPerPort){
   ledsPerPort_ = ledsPerPort;
   numLeds_ = numRows_ * numCols_;
 
-  ledInputArray = new CRGB* [numRows_];
-  for(int i = 0; i < numRows_; i++){
-    ledInputArray[i] = new CRGB[numCols_];
-  }
-
-  ledOutputArray_ = new CRGB [numPorts_];
-
 }
 
 
 
 //deletes the allocated memory for its arrays
 LEDArray::~LEDArray(){
-  for(int i = 0; i < numRows_; i++){
-    delete[] ledInputArray[i];
-  }
-  delete[] ledInputArray;
-  ledInputArray = NULL;
 
-  delete[] ledOutputArray_;
-  ledOutputArray_ = NULL;
 }
 
 
@@ -133,38 +119,18 @@ void LEDArray::updateOutputArray_(){
 
 
 
-LEDAnimation::LEDAnimation(int numRows, int numCols, int numFrames, int refreshRate){
-
-  numFrames_ = numFrames;
-  refreshRate_ = refreshRate;
+LEDAnimation::LEDAnimation(int numRows, int numCols, int numMaxFrames){
 
   numRows_ = numRows;
   numCols_ = numCols;
-/*
-  frameArray_ = new CRGB** [numFrames_];
+  numMaxFrames_ = numMaxFrames;
+  numFrames_ = 0;
+  refreshRate_ = 0;
 
-  for(int i = 0; i < numFrames_; i++){
-    frameArray_[i] = new CRGB* [numRows_];
-    for(int j = 0; j < numRows_; j++){
-      frameArray_[i][j] = new CRGB[numCols_];
-    }
-  }*/
 }
 
-
-
 LEDAnimation::~LEDAnimation(){
-/*
-  for(int i = 0; i < numFrames_; i++){
-    for(int j = 0; j < numRows_; j++){
-      delete[] frameArray_[i][j];
-    }
-    delete[] frameArray_[i];
-    frameArray_[i] = NULL;
-  }
-  delete[] frameArray_;
-  frameArray_ = NULL;
-*/
+
 }
 
 void LEDAnimation::addPixle(int frameNum, int row, int col, CRGB data){
@@ -180,6 +146,21 @@ int LEDAnimation::getNumFrames(){
 
 int LEDAnimation::getRefreshRate(){
   return refreshRate_;
+}
+
+void LEDAnimation::setRefreshRate(int refreshRate){
+  refreshRate_ = refreshRate;
+}
+
+void LEDAnimation::setNumFrames(int numFrames){
+    numFrames_ = numFrames;
+}
+
+void LEDAnimation::addFrame(){
+
+  if(numFrames_ < numMaxFrames_){
+    numFrames_++;
+  }
 }
 
 void LEDAnimation::printFrames(){

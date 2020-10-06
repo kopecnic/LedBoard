@@ -32,7 +32,7 @@ class LEDArray{
     void clearArray();
 
     //public member variables
-    CRGB** ledInputArray;
+    CRGB ledInputArray[LED_ARRAY_NUM_ROWS][LED_ARRAY_NUM_COLS];
 
 
   private:
@@ -46,7 +46,7 @@ class LEDArray{
     int numPorts_;
     int ledsPerPort_;
     int numLeds_;
-    CRGB* ledOutputArray_;
+    CRGB ledOutputArray_[LED_ARRAY_NUM_LEDS];
 
 
 
@@ -57,7 +57,7 @@ class LEDAnimation{
 public:
 
   //constructor
-  LEDAnimation(int numRows, int numCols, int numFrames, int refreshRate);
+  LEDAnimation(int numRows, int numCols, int numMaxFrames);
 
   //destructor
   ~LEDAnimation();
@@ -66,8 +66,10 @@ public:
   void addPixle(int frameNum, int row, int col, CRGB data);
   int getNumFrames();
   int getRefreshRate();
+  void setRefreshRate(int refreshRate);
+  void setNumFrames(int numFrames);
+  void addFrame();
   void printFrames();
-  //set refreshRate
 
   //public member variables
 
@@ -77,10 +79,11 @@ private:
 
   //private member variables
   int numFrames_;
+  int numMaxFrames_;
   int numRows_;
   int numCols_;
   int refreshRate_;
-  CRGB frameArray_[4][2][LED_ARRAY_NUM_COLS];
+  CRGB frameArray_[ANIMATION_NUM_MAX_FRAMES][LED_ARRAY_NUM_ROWS][LED_ARRAY_NUM_COLS];
   //CRGB*** frameArray_;
 
 };

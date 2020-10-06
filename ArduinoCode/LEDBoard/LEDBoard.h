@@ -12,6 +12,10 @@ TODO
 //number of rows int the led array
 #define LED_ARRAY_NUM_ROWS 2
 
+#define LED_ARRAY_NUM_LEDS 8
+
+#define ANIMATION_NUM_MAX_FRAMES 10
+
 //specify teensy type i.e. Teensy 3.6 = 36
 #define TEENSY_VERSION 36
 
