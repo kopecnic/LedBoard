@@ -9,7 +9,6 @@
   -add function to mix arrays (take a base array and a modifier array, where modifier array is 0 dont modify origional)
   -add function to dim whole array
   -add function to dim array with pixle by pixle control ((take a base array and a modifier array, where modifier array is 0 dont modify origional)
-  -add new class for frame/animation
   -add new funcion to play animation
 */
 
@@ -84,7 +83,7 @@ private:
   int numCols_;
   int refreshRate_;
   CRGB frameArray_[ANIMATION_NUM_MAX_FRAMES][LED_ARRAY_NUM_ROWS][LED_ARRAY_NUM_COLS];
-  //CRGB*** frameArray_;
+
 
 };
 

@@ -3,18 +3,36 @@
 
 /*
 TODO
--Remove old code to use the define instread of the dynamic arrays
+-modify sdGetAnimation() to accept a file name input
+-add function to read file containing names of each animation
 */
+
+//--------------------------------------------------------------------------------------
+//Debug Enables
+//--------------------------------------------------------------------------------------
+
+//when enabled, program will wait for serial connection to begin
+#define WAIT_FOR_SERIAL 1
+
+//when enabled, program with print SD debug messages to serial
+#define SD_DEBUG 1
+
+//--------------------------------------------------------------------------------------
+//General Defines
+//--------------------------------------------------------------------------------------
 
 //number of columns in the led array
 #define LED_ARRAY_NUM_COLS 4
 
 //number of rows int the led array
-#define LED_ARRAY_NUM_ROWS 2
+#define LED_ARRAY_NUM_ROWS 1
 
-#define LED_ARRAY_NUM_LEDS 8
+//number of total leds in the array
+#define LED_ARRAY_NUM_LEDS 4
 
-#define ANIMATION_NUM_MAX_FRAMES 10
+//--------------------------------------------------------------------------------------
+//LEDArray Defines
+//--------------------------------------------------------------------------------------
 
 //specify teensy type i.e. Teensy 3.6 = 36
 #define TEENSY_VERSION 36
@@ -40,6 +58,17 @@ TODO
 //number of leds that are attatched to each port
 #define LEDS_PER_DATA_PIN 4
 
-#define WAIT_FOR_SERIAL 1
+//--------------------------------------------------------------------------------------
+//Animation Control Defines
+//--------------------------------------------------------------------------------------
+
+//number of frames in the largest animation
+#define ANIMATION_NUM_MAX_FRAMES 10
+
+//--------------------------------------------------------------------------------------
+//
+//--------------------------------------------------------------------------------------
+
+
 
 #endif

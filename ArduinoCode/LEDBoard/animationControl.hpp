@@ -10,16 +10,15 @@
 #ifndef ANIMATION_CONTROL_HPP
 #define ANIMATION_CONTROL_HPP
 
-#define MAX_NUM_FRAMES 4
-
 #include "Arduino.h"
 #include "LEDBoard.h"
 
-LEDAnimation animation(LED_ARRAY_NUM_ROWS, LED_ARRAY_NUM_COLS, MAX_NUM_FRAMES);
+LEDAnimation animation(LED_ARRAY_NUM_ROWS, LED_ARRAY_NUM_COLS, ANIMATION_NUM_MAX_FRAMES);
 
+//for testing rn; reads animation file into animation class and prints the contents
 void loadAnimation(){
 
-  sdCardTest(animation);
+  sdGetAnimation(animation);
   animation.printFrames();
 }
 

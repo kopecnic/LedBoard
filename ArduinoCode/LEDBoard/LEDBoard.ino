@@ -16,9 +16,10 @@ void setup() {
   }
 
  ledArrayInit();
- //sdCardInit();
+ sdCardInit();
  loadAnimation();
- //spectrumAnalyzerInit();
+
+
 }
 
 void loop() {
@@ -48,10 +49,5 @@ void loop() {
   ledArray.updateArray();
 
   delay(1000);
-
-  //spectrumAnalyzerRun();
-
-  //Serial.println(analogRead(A0));
-
 
 }

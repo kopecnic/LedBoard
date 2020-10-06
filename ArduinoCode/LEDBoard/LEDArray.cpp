@@ -5,7 +5,7 @@
 #include "LEDArray.h"
 
 
-//creates a LED array object and allocates memory for its arrays
+
 LEDArray::LEDArray(int numCols, int numRows, int numPorts, int ledsPerPort){
 
   numRows_ = numRows;
@@ -18,7 +18,6 @@ LEDArray::LEDArray(int numCols, int numRows, int numPorts, int ledsPerPort){
 
 
 
-//deletes the allocated memory for its arrays
 LEDArray::~LEDArray(){
 
 }
@@ -68,15 +67,16 @@ void LEDArray::initArray(){
 
   this->clearArray();
   this->updateArray();
-  FastLED.show();
 }
 
 
 
 //updates the output array using the input array and updates the leds
 void LEDArray::updateArray(){
+  int time = micros();
   this->updateOutputArray_();
   FastLED.show();
+  Serial.println(micros() - time);
 }
 
 
@@ -119,6 +119,12 @@ void LEDArray::updateOutputArray_(){
 
 
 
+
+
+
+
+
+
 LEDAnimation::LEDAnimation(int numRows, int numCols, int numMaxFrames){
 
   numRows_ = numRows;
@@ -129,10 +135,15 @@ LEDAnimation::LEDAnimation(int numRows, int numCols, int numMaxFrames){
 
 }
 
+
+
 LEDAnimation::~LEDAnimation(){
 
 }
 
+
+
+//adds a single pixle to the animation storage array
 void LEDAnimation::addPixle(int frameNum, int row, int col, CRGB data){
 
   if(frameNum < numFrames_ && row < numRows_ && col < numCols_){
@@ -140,22 +151,35 @@ void LEDAnimation::addPixle(int frameNum, int row, int col, CRGB data){
   }
 }
 
+
+
+//returns number of frames stored in the animation
 int LEDAnimation::getNumFrames(){
   return numFrames_;
 }
 
+
+
+//returns the current refresh rate of the animation
 int LEDAnimation::getRefreshRate(){
   return refreshRate_;
 }
 
+
+//sets the refresh rate of the animation
 void LEDAnimation::setRefreshRate(int refreshRate){
   refreshRate_ = refreshRate;
 }
 
+
+//set the number of frames in the animation
 void LEDAnimation::setNumFrames(int numFrames){
     numFrames_ = numFrames;
 }
 
+
+
+//adds one frame to the total number of frames in the animation
 void LEDAnimation::addFrame(){
 
   if(numFrames_ < numMaxFrames_){
@@ -163,6 +187,9 @@ void LEDAnimation::addFrame(){
   }
 }
 
+
+
+//prints all used frames in the animation
 void LEDAnimation::printFrames(){
 
   Serial.println("-------------");
