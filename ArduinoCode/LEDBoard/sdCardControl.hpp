@@ -11,12 +11,19 @@
 
 #include "Arduino.h"
 
-#define SD_DEBUG 0
+#define SD_DEBUG 1
 
+//for SD card
+#include <SD.h>
+#include <SPI.h>
+
+//for SD card
+File inFile;
+const int chipSelect = BUILTIN_SDCARD;
 
 void sdCardInit(){
 
-  if(SD_DEBUG 0) Serial.print("Initializing SD card...");
+  if(SD_DEBUG) Serial.print("Initializing SD card...");
 
   if (!SD.begin(chipSelect)) {
     Serial.println("initialization failed!");
@@ -24,30 +31,78 @@ void sdCardInit(){
   }
   Serial.println("initialization done.");
 
-  inFile = SD.open("Input.txt");
+}
+
+void sdCardTest(){
+
+  if(SD_DEBUG) Serial.print("Initializing SD card...");
+
+  if (!SD.begin(chipSelect)) {
+    Serial.println("initialization failed!");
+    return;
+  }
+  Serial.println("initialization done.");
+
+  inFile = SD.open("Test.txt");
   if (inFile) {
 
     Serial.println("Input.txt");
-    char data[8];
+
+    String buffer = "";
+    int pos = 0;
+    int numFrames = 0;
+    int refreshRate = 0;
+    int numRows = 0;
+    int numCols = 0;
     int frameNum = 0;
-    // read from the file until there's nothing else in it:
+
     while (inFile.available()) {
-      inFile.read(data, 3);
-      //frameNum = strtol(data, NULL, 10);
-      Serial.println(frameNum);
 
-      for(int pixle = 0; pixle < NUM_LEDS; pixle++){
+      buffer = inFile.readStringUntil('\n');
 
-        inFile.read(data, 8);
-        Serial.write(data, 8);
-        Serial.println();
-        ledBuff[frameNum][pixle] = strtol(data, NULL, 16);
-        ledBuff[frameNum][pixle] %= 5;
-        inFile.read();
+      if(buffer == "END_HEADER"){break;}
 
+      pos = buffer.indexOf(":");
+
+      if(pos == -1){break;}
+
+      if(buffer.substring(0, pos) == "numFrames"){
+        numFrames = buffer.substring(pos + 1, buffer.length()).toInt();
       }
-      inFile.read(data, 2);
-      frameNum++;
+      else if(buffer.substring(0, pos) == "refreshRate"){
+        refreshRate = buffer.substring(pos + 1, buffer.length()).toInt();
+      }
+      else if(buffer.substring(0, pos) == "numRows"){
+        numRows = buffer.substring(pos + 1, buffer.length()).toInt();
+      }
+      else if(buffer.substring(0, pos) == "numCols"){
+        numCols = buffer.substring(pos + 1, buffer.length()).toInt();
+      }
+
+      Serial.print("numFrames:");
+      Serial.println(numFrames);
+      Serial.print("refreshRate:");
+      Serial.println(refreshRate);
+      Serial.print("numRows:");
+      Serial.println(numRows);
+      Serial.print("numCols:");
+      Serial.println(numCols);
+
+
+    }
+
+    while (inFile.available()) {
+
+      buffer = inFile.readStringUntil('\n');
+
+      if(buffer.indexOf("frame:") == 0){
+          frameNum = buffer.substring(pos + 1, buffer.length()).toInt();
+      }
+      for(int i = 0; i < numRows; i++){
+        //add in code to get values from file for leds
+      }
+
+
     }
 
     // close the file:
@@ -57,7 +112,7 @@ void sdCardInit(){
     Serial.println("error opening Input.txt");
   }
 
-}
 
+}
 
 #endif
