@@ -64,7 +64,7 @@ void animationLoadAnimation(LEDAnimation &animation, int animationNum){
 
 
 //display the currently loaded animation, should be called as fast as possible as it has a timer to limit the refresh rate
-void animationPlayAnimation(LEDAnimation &animation){
+void animationPlayAnimation(LEDAnimation &animation, LEDArray &ledArray, bool updateArray){
 
   //set the timers refresh rate to the current refresh rate of the animation
   animationTimer.set_delay_millis(animation.getRefreshRate());
@@ -89,7 +89,7 @@ void animationPlayAnimation(LEDAnimation &animation){
     }
 
     //update the led array
-    ledArray.updateArray();
+    if(updateArray) ledArray.updateArray();
   }
 }
 

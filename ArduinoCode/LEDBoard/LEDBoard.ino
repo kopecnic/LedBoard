@@ -2,15 +2,14 @@
 #include "ledArrayControl.hpp"
 #include "sdCardControl.hpp"
 #include "animationControl.hpp"
+#include "systemControl.hpp"
 
-char animationInFileName[] = "aniName.txt";
-LEDAnimation animation(LED_ARRAY_NUM_ROWS, LED_ARRAY_NUM_COLS, ANIMATION_NUM_MAX_FRAMES);
 
 
 void setup() {
   // put your setup code here, to run once:
 
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   if(WAIT_FOR_SERIAL){
     while (!Serial) {
@@ -18,18 +17,14 @@ void setup() {
     }
   }
 
- ledArrayInit();
- sdCardInit();
-
- animationGetAnimations(animationInFileName);
- animationLoadAnimation(animation, 0);
+  systemInit();
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  modeControl(1);
 
-  animationPlayAnimation(animation);
 
   // ledArray.setSolidColor(CRGB::White);
   // ledArray.updateArray();

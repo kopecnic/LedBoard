@@ -74,7 +74,6 @@ void LEDArray::initArray(){
   #endif
 
   this->clearArray();
-  this->updateArray();
 }
 
 
@@ -105,6 +104,7 @@ void LEDArray::clearArray(){
       ledInputArray[i][j] = CRGB::Black;
     }
   }
+  this->updateArray();
 }
 
 
@@ -160,7 +160,7 @@ void LEDAnimation::addPixle(int frameNum, int row, int col, CRGB data){
 
 
 
-//
+//get the value of a specified pixle in the animation
 CRGB LEDAnimation::getPixle(int frameNum, int row, int col){
 
   if(frameNum < numFrames_ && row < numRows_ && col < numCols_){
