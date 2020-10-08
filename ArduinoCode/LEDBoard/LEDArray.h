@@ -69,6 +69,8 @@ public:
   int getRefreshRate();
   void setRefreshRate(int refreshRate);
   void setNumFrames(int numFrames);
+  void setBrightness(int brightness);
+  int getBrightness();
   void addFrame();
   void printFrames();
 
@@ -85,6 +87,7 @@ private:
   int numRows_;
   int numCols_;
   int refreshRate_;
+  int brightness_;
   CRGB frameArray_[ANIMATION_NUM_MAX_FRAMES][LED_ARRAY_NUM_ROWS][LED_ARRAY_NUM_COLS];
 
 

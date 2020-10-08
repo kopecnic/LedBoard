@@ -85,6 +85,7 @@ void animationPlayAnimation(LEDAnimation &animation, LEDArray &ledArray, bool up
     for(int i = 0; i < LED_ARRAY_NUM_ROWS; i++){
       for(int j = 0; j < LED_ARRAY_NUM_COLS; j++){
         ledArray.ledInputArray[i][j] = animation.getPixle(currentFrame, i, j);
+        ledArray.ledInputArray[i][j] %= animation.getBrightness();
       }
     }
 

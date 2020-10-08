@@ -14,7 +14,7 @@ TODO
 //--------------------------------------------------------------------------------------
 
 //when enabled, program will wait for serial connection to begin
-#define WAIT_FOR_SERIAL 1
+#define WAIT_FOR_SERIAL 0
 
 //when enabled, program with print SD debug messages to serial
 #define SD_DEBUG 1

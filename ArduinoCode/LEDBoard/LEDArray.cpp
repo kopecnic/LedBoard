@@ -139,6 +139,7 @@ LEDAnimation::LEDAnimation(int numRows, int numCols, int numMaxFrames){
   numFrames_ = 0;
   currentFrame_ = 0;
   refreshRate_ = 0;
+  brightness_ = 255;
 
 }
 
@@ -208,6 +209,19 @@ void LEDAnimation::setRefreshRate(int refreshRate){
 //set the number of frames in the animation
 void LEDAnimation::setNumFrames(int numFrames){
     numFrames_ = numFrames;
+}
+
+
+
+//
+void LEDAnimation::setBrightness(int brightness){
+  brightness_ = brightness;
+}
+
+
+//
+int LEDAnimation::getBrightness(){
+  return brightness_;
 }
 
 
