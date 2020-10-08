@@ -63,7 +63,9 @@ public:
 
   //public member functions
   void addPixle(int frameNum, int row, int col, CRGB data);
+  CRGB getPixle(int frameNum, int row, int col);
   int getNumFrames();
+  int advanceFrame();
   int getRefreshRate();
   void setRefreshRate(int refreshRate);
   void setNumFrames(int numFrames);
@@ -78,6 +80,7 @@ private:
 
   //private member variables
   int numFrames_;
+  int currentFrame_;
   int numMaxFrames_;
   int numRows_;
   int numCols_;

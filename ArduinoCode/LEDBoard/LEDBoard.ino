@@ -1,12 +1,11 @@
 #include "LEDBoard.h"
 #include "ledArrayControl.hpp"
-#include "spectrumAnalyzer.hpp"
 #include "sdCardControl.hpp"
 #include "animationControl.hpp"
 
 char animationInFileName[] = "aniName.txt";
-
 LEDAnimation animation(LED_ARRAY_NUM_ROWS, LED_ARRAY_NUM_COLS, ANIMATION_NUM_MAX_FRAMES);
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -25,37 +24,36 @@ void setup() {
  animationGetAnimations(animationInFileName);
  animationLoadAnimation(animation, 0);
 
- animation.printFrames();
-
-
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-  ledArray.setSolidColor(CRGB::White);
-  ledArray.updateArray();
+  animationPlayAnimation(animation);
 
-  delay(1000);
-
-  ledArray.setSolidColor(CRGB::Red);
-  ledArray.updateArray();
-
-  delay(1000);
-
-  ledArray.setSolidColor(CRGB::Green);
-  ledArray.updateArray();
-
-  delay(1000);
-
-  ledArray.setSolidColor(CRGB::Blue);
-  ledArray.updateArray();
-
-  delay(1000);
-
-  ledArray.setSolidColor(CRGB::Black);
-  ledArray.updateArray();
-
-  delay(1000);
+  // ledArray.setSolidColor(CRGB::White);
+  // ledArray.updateArray();
+  //
+  // delay(1000);
+  //
+  // ledArray.setSolidColor(CRGB::Red);
+  // ledArray.updateArray();
+  //
+  // delay(1000);
+  //
+  // ledArray.setSolidColor(CRGB::Green);
+  // ledArray.updateArray();
+  //
+  // delay(1000);
+  //
+  // ledArray.setSolidColor(CRGB::Blue);
+  // ledArray.updateArray();
+  //
+  // delay(1000);
+  //
+  // ledArray.setSolidColor(CRGB::Black);
+  // ledArray.updateArray();
+  //
+  // delay(1000);
 
 }

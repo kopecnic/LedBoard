@@ -7,7 +7,7 @@ TODO
 -add function to read file containing names of each animation
 */
 
-#include <SimpleTimer.h>
+#include <EasyTimer.h>
 
 //--------------------------------------------------------------------------------------
 //Debug Enables
@@ -29,10 +29,10 @@ TODO
 #define LED_ARRAY_NUM_COLS 4
 
 //number of rows int the led array
-#define LED_ARRAY_NUM_ROWS 2
+#define LED_ARRAY_NUM_ROWS 1
 
 //number of total leds in the array
-#define LED_ARRAY_NUM_LEDS 8
+#define LED_ARRAY_NUM_LEDS 4
 
 //--------------------------------------------------------------------------------------
 //LEDArray Defines

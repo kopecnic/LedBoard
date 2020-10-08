@@ -137,6 +137,7 @@ LEDAnimation::LEDAnimation(int numRows, int numCols, int numMaxFrames){
   numCols_ = numCols;
   numMaxFrames_ = numMaxFrames;
   numFrames_ = 0;
+  currentFrame_ = 0;
   refreshRate_ = 0;
 
 }
@@ -159,9 +160,35 @@ void LEDAnimation::addPixle(int frameNum, int row, int col, CRGB data){
 
 
 
+//
+CRGB LEDAnimation::getPixle(int frameNum, int row, int col){
+
+  if(frameNum < numFrames_ && row < numRows_ && col < numCols_){
+    return frameArray_[frameNum][row][col];
+  }
+
+  return 0;
+}
+
+
+
 //returns number of frames stored in the animation
 int LEDAnimation::getNumFrames(){
   return numFrames_;
+}
+
+
+
+//
+int LEDAnimation::advanceFrame(){
+
+  if(currentFrame_ < numFrames_ - 1){
+    return currentFrame_++;
+  }
+  else{
+    currentFrame_ = 0;
+    return numFrames_ - 1;
+  }
 }
 
 
