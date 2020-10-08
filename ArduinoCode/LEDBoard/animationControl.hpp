@@ -13,14 +13,37 @@
 #include "Arduino.h"
 #include "LEDBoard.h"
 
-LEDAnimation animation(LED_ARRAY_NUM_ROWS, LED_ARRAY_NUM_COLS, ANIMATION_NUM_MAX_FRAMES);
+String animationFileNames[ANIMATION_NUM_MAX_ANIMATIONS];
 
-//for testing rn; reads animation file into animation class and prints the contents
-void loadAnimation(){
+//gets the list of animation file names and stores it in the animationFileNames string array
+void animationGetAnimations(char* inFileName){
 
-  sdGetAnimation(animation);
-  animation.printFrames();
+  //call the sd card function to retrieve the animation files names
+  sdGetAnimationFileNames(animationFileNames, inFileName);
+
+  //if debug is enabled, print the files that were found
+  if(ANIMATION_CONTROL_DEBUG){
+    Serial.println("(sdGetAnimationFileNames()): Files found:");
+
+    for(int i = 0; i < ANIMATION_NUM_MAX_ANIMATIONS; i++){
+     if(animationFileNames[i] != ""){
+        Serial.println(animationFileNames[i]);
+     }
+    }
+
+    Serial.println();
+  }
 }
 
+//gets the data stored int the animationFileName animation file and loads it into the animation
+void animationLoadAnimation(LEDAnimation &animation, int animationNum){
+
+  //store the animation file string as a char array
+  char charAnimationFileName[animationFileNames[animationNum].length()];
+  animationFileNames[animationNum].toCharArray(charAnimationFileName, animationFileNames[animationNum].length() + 1);
+
+  //call the sd card function to retrieve the animation data
+  sdGetAnimation(animation, charAnimationFileName);
+}
 
 #endif

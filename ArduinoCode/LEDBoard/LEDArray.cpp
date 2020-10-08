@@ -26,6 +26,9 @@ LEDArray::~LEDArray(){
 
 //prints the contents of the input array to serial
 void LEDArray::printInputArray(){
+
+  Serial.println("(LEDArray::printInputArray()):");
+  Serial.println("-------------");
   for(int i = 0; i < numRows_; i++){
     for(int j = 0; j < numCols_; j++){
       Serial.print(ledInputArray[i][j], HEX);
@@ -33,6 +36,8 @@ void LEDArray::printInputArray(){
     }
     Serial.println();
   }
+  Serial.println("-------------");
+  Serial.println();
 }
 
 
@@ -40,10 +45,13 @@ void LEDArray::printInputArray(){
 //prints the contencts of the output array to serial
 void LEDArray::printOutputArray(){
 
+  Serial.println("(LEDArray::printOutputArray()):");
+  Serial.println("-------------");
   for(int i = 0; i < numPorts_ * ledsPerPort_; i++){
       Serial.print(ledOutputArray_[i], HEX);
       Serial.print(" ");
   }
+  Serial.println("-------------");
   Serial.println();
 }
 
@@ -73,10 +81,8 @@ void LEDArray::initArray(){
 
 //updates the output array using the input array and updates the leds
 void LEDArray::updateArray(){
-  int time = micros();
   this->updateOutputArray_();
   FastLED.show();
-  Serial.println(micros() - time);
 }
 
 
@@ -192,6 +198,7 @@ void LEDAnimation::addFrame(){
 //prints all used frames in the animation
 void LEDAnimation::printFrames(){
 
+  Serial.println("(LEDAnimation::printFrames()):");
   Serial.println("-------------");
   for(int i = 0; i < numFrames_; i++){
     for(int j = 0; j < numRows_; j++){
@@ -209,7 +216,7 @@ void LEDAnimation::printFrames(){
     }
     Serial.println("-------------");
   }
-
+  Serial.println();
 }
 
 

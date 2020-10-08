@@ -20,23 +20,80 @@
 File inFile;
 const int chipSelect = BUILTIN_SDCARD;
 
-
 //begins communication with the SD card
 void sdCardInit(){
 
-  if(SD_DEBUG) Serial.print("Initializing SD card...");
+  if(SD_DEBUG) Serial.println("(sdCardInit()): Initializing SD card...");
 
+  //begin sd car communication
   if (!SD.begin(chipSelect)) {
-    if(SD_DEBUG) Serial.println("initialization failed!");
+    if(SD_DEBUG) Serial.println("(sdCardInit()): Initialization failed!");
     return;
   }
 
-  if(SD_DEBUG) Serial.println("initialization done.");
+  if(SD_DEBUG) Serial.println("(sdCardInit()): Initialization done.");
+
+  if(SD_DEBUG) Serial.println();
+
+}
+
+//retrieves all the animation file names from inFileName
+void sdGetAnimationFileNames(String* animationFileNames, char* inFileName){
+
+  //stores the line read from the sd card
+  String buffer = "";
+
+  //for storing position along the read line
+  int linePos = 0;
+
+  //stores number of frames present in the file
+  int numAnimations = 0;
+
+  //
+  inFile = SD.open(inFileName);
+
+  if(inFile){
+
+    if(SD_DEBUG){
+      Serial.print("(sdGetAnimationFileNames()): Opened ");
+      Serial.println(inFileName);
+    }
+
+    //read numAnimations
+    buffer = inFile.readStringUntil('\n');
+    linePos = buffer.indexOf(":");
+    numAnimations = buffer.substring(linePos + 1, buffer.length()).toInt();
+
+    //read END_HEADER
+    inFile.readStringUntil('\n');
+
+
+    //store the found file names in the animationFileNames array
+    for(int i = 0; i < numAnimations; i++){
+
+      if(i < ANIMATION_NUM_MAX_ANIMATIONS){
+        animationFileNames[i] = inFile.readStringUntil('\n');
+      }
+    }
+
+
+  }
+
+  else {
+
+    // if the file didn't open, print an error:
+    if(SD_DEBUG){
+      Serial.print("(sdGetAnimationFileNames()): Error opening: ");
+      Serial.println(inFileName);
+    }
+  }
+
+  if(SD_DEBUG) Serial.println();
 
 }
 
 //reads an animation file from the sd card
-void sdGetAnimation(LEDAnimation &animation){
+void sdGetAnimation(LEDAnimation &animation, char* animationFileName){
 
   //stores the line read from the sd card
   String buffer = "";
@@ -57,10 +114,14 @@ void sdGetAnimation(LEDAnimation &animation){
   int numCols = 0;
 
   //open the input file
-  inFile = SD.open("Test.txt");
+  inFile = SD.open(animationFileName);
+
   if (inFile) {
 
-    if(SD_DEBUG) Serial.println("Input.txt");
+    if(SD_DEBUG){
+      Serial.print("(sdGetAnimation()): Opened ");
+      Serial.println(animationFileName);
+    }
 
     //read numFrames
     buffer = inFile.readStringUntil('\n');
@@ -86,13 +147,13 @@ void sdGetAnimation(LEDAnimation &animation){
     inFile.readStringUntil('\n');
 
     if(SD_DEBUG){
-      Serial.print("numFrames:");
+      Serial.print("(sdGetAnimation()): numFrames:");
       Serial.println(numFrames);
-      Serial.print("refreshRate:");
+      Serial.print("(sdGetAnimation()): refreshRate:");
       Serial.println(refreshRate);
-      Serial.print("numRows:");
+      Serial.print("(sdGetAnimation()): numRows:");
       Serial.println(numRows);
-      Serial.print("numCols:");
+      Serial.print("(sdGetAnimation()): numCols:");
       Serial.println(numCols);
     }
 
@@ -138,9 +199,14 @@ void sdGetAnimation(LEDAnimation &animation){
 
   else {
     // if the file didn't open, print an error:
-    if(SD_DEBUG) Serial.println("error opening Input.txt");
+    if(SD_DEBUG){
+      Serial.print("(sdGetAnimation()): Error opening: ");
+      Serial.println(animationFileName);
+    }
   }
-  
+
+  if(SD_DEBUG) Serial.println();
+
 }
 
 #endif

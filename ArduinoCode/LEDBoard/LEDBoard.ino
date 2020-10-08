@@ -4,6 +4,10 @@
 #include "sdCardControl.hpp"
 #include "animationControl.hpp"
 
+char animationInFileName[] = "aniName.txt";
+
+LEDAnimation animation(LED_ARRAY_NUM_ROWS, LED_ARRAY_NUM_COLS, ANIMATION_NUM_MAX_FRAMES);
+
 void setup() {
   // put your setup code here, to run once:
 
@@ -17,7 +21,11 @@ void setup() {
 
  ledArrayInit();
  sdCardInit();
- loadAnimation();
+
+ animationGetAnimations(animationInFileName);
+ animationLoadAnimation(animation, 0);
+
+ animation.printFrames();
 
 
 }

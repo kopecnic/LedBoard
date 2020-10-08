@@ -7,6 +7,8 @@ TODO
 -add function to read file containing names of each animation
 */
 
+#include <SimpleTimer.h>
+
 //--------------------------------------------------------------------------------------
 //Debug Enables
 //--------------------------------------------------------------------------------------
@@ -17,6 +19,8 @@ TODO
 //when enabled, program with print SD debug messages to serial
 #define SD_DEBUG 1
 
+#define ANIMATION_CONTROL_DEBUG 1
+
 //--------------------------------------------------------------------------------------
 //General Defines
 //--------------------------------------------------------------------------------------
@@ -25,10 +29,10 @@ TODO
 #define LED_ARRAY_NUM_COLS 4
 
 //number of rows int the led array
-#define LED_ARRAY_NUM_ROWS 1
+#define LED_ARRAY_NUM_ROWS 2
 
 //number of total leds in the array
-#define LED_ARRAY_NUM_LEDS 4
+#define LED_ARRAY_NUM_LEDS 8
 
 //--------------------------------------------------------------------------------------
 //LEDArray Defines
@@ -64,6 +68,9 @@ TODO
 
 //number of frames in the largest animation
 #define ANIMATION_NUM_MAX_FRAMES 10
+
+//max number of animation files
+#define ANIMATION_NUM_MAX_ANIMATIONS 10
 
 //--------------------------------------------------------------------------------------
 //

@@ -24,5 +24,9 @@ void ledArrayInit(){
 
 }
 
+void ledArrayPlayAnimation(LEDAnimation &animation){
+
+}
+
 
 #endif
