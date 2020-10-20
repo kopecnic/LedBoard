@@ -13,14 +13,14 @@
 
 int SAMPLE_RATE_HZ = 20000;             // Sample rate of the audio in hertz.
 float SPECTRUM_MIN_DB = 40.0;          // Audio intensity (in decibels) that maps to low LED brightness.
-float SPECTRUM_MAX_DB = 70.0;          // Audio intensity (in decibels) that maps to high LED brightness.
+float SPECTRUM_MAX_DB = 80.0;          // Audio intensity (in decibels) that maps to high LED brightness.
 int LEDS_ENABLED = 1;                  // Control if the LED's should display the spectrum or not.  1 is true, 0 is false.
                                        // Useful for turning the LED display on and off with commands from the serial port.
 const int FFT_SIZE = 256;              // Size of the FFT.  Realistically can only be at most 256
                                        // without running out of memory for buffers and other state.
 const int AUDIO_INPUT_PIN = A9;        // Input ADC pin for audio data.
 const int ANALOG_READ_RESOLUTION = 10; // Bits of resolution for the ADC.
-const int ANALOG_READ_AVERAGING = 2;  // Number of samples to average with each ADC reading.
+const int ANALOG_READ_AVERAGING = 1;  // Number of samples to average with each ADC reading.
 const int NEO_PIXEL_PIN = 1;           // Output pin for neo pixels.
 const int NEO_PIXEL_COUNT = 5;         // Number of neo pixels.  You should be able to increase this without
                                        // any other changes to the program.
@@ -77,11 +77,13 @@ void spectrumSetup() {
   //   frequencyWindow[i] = i*windowSize;
   // }
 
-  frequencyWindow[0] = 60;
+  //https://www.teachmeaudio.com/mixing/techniques/audio-spectrum
+
+  frequencyWindow[0] = 100;
   frequencyWindow[1] = 250;
   frequencyWindow[2] = 500;
-  frequencyWindow[3] = 2000;
-  frequencyWindow[4] = 4000;
+  frequencyWindow[3] = 1000;
+  frequencyWindow[4] = 2000;
   frequencyWindow[5] = 10000;
 }
 

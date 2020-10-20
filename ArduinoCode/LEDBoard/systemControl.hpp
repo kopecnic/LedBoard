@@ -157,6 +157,7 @@ void modeControl(int mode){
       // Serial.println(analogRead(A9));
       // delay(5);
       spectrumAnalyzerRun(ledArray);
+      delay(10);
     }
 
     //off
