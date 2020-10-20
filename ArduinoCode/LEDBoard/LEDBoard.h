@@ -17,32 +17,32 @@ TODO
 #define WAIT_FOR_SERIAL 0
 
 //when enabled, program with print SD debug messages to serial
-#define SD_DEBUG 1
+#define SD_DEBUG 0
 
-#define ANIMATION_CONTROL_DEBUG 1
+#define ANIMATION_CONTROL_DEBUG 0
 
 //--------------------------------------------------------------------------------------
 //General Defines
 //--------------------------------------------------------------------------------------
 
 //number of columns in the led array
-#define LED_ARRAY_NUM_COLS 4
+#define LED_ARRAY_NUM_COLS 5
 
 //number of rows int the led array
-#define LED_ARRAY_NUM_ROWS 1
+#define LED_ARRAY_NUM_ROWS 5
 
 //number of total leds in the array
-#define LED_ARRAY_NUM_LEDS 4
+#define LED_ARRAY_NUM_LEDS 25
 
 //--------------------------------------------------------------------------------------
 //LEDArray Defines
 //--------------------------------------------------------------------------------------
 
 //specify teensy type i.e. Teensy 3.6 = 36
-#define TEENSY_VERSION 36
+#define TEENSY_VERSION 41
 
-#define LED_CHIPSET NEOPIXEL //for Teensy 3.6
-//#define LED_CHIPSET WS2812B //Teensy 4.x
+//#define LED_CHIPSET NEOPIXEL //for Teensy 3.6
+#define LED_CHIPSET WS2812B //Teensy 4.x
 
 /*
  *  If you are using the first set of pins with N number of data pins, you must select the first pin you are using
@@ -57,10 +57,10 @@ TODO
 #define DATA_PINS_STARTING_NUM 1
 
 //number of ports being used on the microcontroller
-#define NUM_DATA_PINS 1
+#define NUM_DATA_PINS 5
 
 //number of leds that are attatched to each port
-#define LEDS_PER_DATA_PIN 4
+#define LEDS_PER_DATA_PIN 5
 
 //--------------------------------------------------------------------------------------
 //Animation Control Defines

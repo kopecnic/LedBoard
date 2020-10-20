@@ -49,12 +49,115 @@ void modeControl(int mode){
 
     //off
     case 0:
+    {
       ledArray.clearArray();
       break;
-
+    }
     case 1:
+    {
       animationPlayAnimation(animation, ledArray, true);
       break;
+    }
+    case 2:
+    {
+      ledArray.setSolidColor(CRGB::White);
+      ledArray.updateArray();
+
+      delay(500);
+
+      ledArray.setSolidColor(CRGB::Red);
+      ledArray.updateArray();
+
+      delay(500);
+
+      ledArray.setSolidColor(CRGB::Green);
+      ledArray.updateArray();
+
+      delay(500);
+
+      ledArray.setSolidColor(CRGB::Blue);
+      ledArray.updateArray();
+
+      delay(500);
+
+      ledArray.setSolidColor(CRGB::Black);
+      ledArray.updateArray();
+
+      //delay(500);
+
+      break;
+    }
+    case 3:
+    {
+      int pos = 0;
+      int lastPos = 0;
+      for(int i = 0; i < 25; i++){
+        pos = i;
+
+        if(pos){
+            lastPos = pos - 1;
+        }
+
+        if((pos/5) % 2 == 0){
+          ledArray.ledInputArray[lastPos/5][lastPos%5] = CRGB::Green;
+          ledArray.ledInputArray[pos/5][pos%5] = CRGB::White;
+          ledArray.updateArray();
+          ledArray.ledInputArray[lastPos/5][lastPos%5] = CRGB::Black;
+          delay(100);
+        }
+        else{
+          ledArray.ledInputArray[lastPos/5][lastPos%5] = CRGB::Green;
+          ledArray.ledInputArray[pos/5][pos%5] = CRGB::White;
+          ledArray.updateArray();
+          ledArray.ledInputArray[lastPos/5][lastPos%5] = CRGB::Black;
+          delay(100);
+        }
+
+      }
+
+      ledArray.ledInputArray[pos/5][pos%5] = CRGB::Green;
+      ledArray.updateArray();
+      delay(100);
+      ledArray.ledInputArray[pos/5][pos%5] = CRGB::Black;
+      ledArray.updateArray();
+      delay(100);
+
+      break;
+    }
+
+    case 4:
+    {
+      for(int i = 0; i < 5; i++){
+        ledArray.ledInputArray[0][i] = CRGB::Green;
+        ledArray.updateArray();
+        delay(100);
+      }
+      for(int i = 1; i < 5; i++){
+        ledArray.ledInputArray[i][4] = CRGB::Green;
+        ledArray.updateArray();
+        delay(100);
+      }
+      for(int i = 1; i < 5; i++){
+        ledArray.ledInputArray[4][4-i] = CRGB::Green;
+        ledArray.updateArray();
+        delay(100);
+      }
+      for(int i = 1; i < 4; i++){
+        ledArray.ledInputArray[4-i][0] = CRGB::Green;
+        ledArray.updateArray();
+        delay(100);
+      }
+      ledArray.clearArray();
+
+      break;
+    }
+
+    case 5:
+    {
+      // Serial.println(analogRead(A9));
+      // delay(5);
+      spectrumAnalyzerRun(ledArray);
+    }
 
     //off
     default:

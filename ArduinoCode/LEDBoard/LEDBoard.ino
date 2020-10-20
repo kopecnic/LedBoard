@@ -2,6 +2,7 @@
 #include "ledArrayControl.hpp"
 #include "sdCardControl.hpp"
 #include "animationControl.hpp"
+#include "spectrumAnalyzer.hpp"
 #include "systemControl.hpp"
 
 
@@ -11,6 +12,8 @@ void setup() {
 
   Serial.begin(115200);
 
+  //analogReadResolution(12);
+
   if(WAIT_FOR_SERIAL){
     while (!Serial) {
       ; // wait for serial port to connect. Needed for Leonardo only
@@ -19,13 +22,22 @@ void setup() {
 
   systemInit();
 
+  spectrumAnalyzerInit();
+
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  modeControl(1);
 
-  
+  // for(int i=0; i<1; i++){
+  //   modeControl(2);
+  // }
+  // for(int i=0; i<2; i++){
+  //   modeControl(3);
+  // }
+  modeControl(5);
+
+
   // ledArray.setSolidColor(CRGB::White);
   // ledArray.updateArray();
   //
