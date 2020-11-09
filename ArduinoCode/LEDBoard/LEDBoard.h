@@ -26,13 +26,13 @@ TODO
 //--------------------------------------------------------------------------------------
 
 //number of columns in the led array
-#define LED_ARRAY_NUM_COLS 5
+#define LED_ARRAY_NUM_COLS 30
 
 //number of rows int the led array
-#define LED_ARRAY_NUM_ROWS 5
+#define LED_ARRAY_NUM_ROWS 30
 
 //number of total leds in the array
-#define LED_ARRAY_NUM_LEDS 25
+#define LED_ARRAY_NUM_LEDS 900
 
 //--------------------------------------------------------------------------------------
 //LEDArray Defines
@@ -57,10 +57,10 @@ TODO
 #define DATA_PINS_STARTING_NUM 1
 
 //number of ports being used on the microcontroller
-#define NUM_DATA_PINS 5
+#define NUM_DATA_PINS 6
 
 //number of leds that are attatched to each port
-#define LEDS_PER_DATA_PIN 5
+#define LEDS_PER_DATA_PIN 150
 
 //--------------------------------------------------------------------------------------
 //Animation Control Defines

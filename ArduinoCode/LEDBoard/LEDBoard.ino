@@ -35,7 +35,7 @@ void loop() {
   // for(int i=0; i<2; i++){
   //   modeControl(3);
   // }
-  modeControl(5);
+  modeControl(2);
 
 
   // ledArray.setSolidColor(CRGB::White);

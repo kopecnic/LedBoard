@@ -60,8 +60,8 @@ void modeControl(int mode){
     }
     case 2:
     {
-      ledArray.setSolidColor(CRGB::White);
-      ledArray.updateArray();
+      //ledArray.setSolidColor(CRGB::White);
+      //ledArray.updateArray();
 
       delay(500);
 
