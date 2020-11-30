@@ -62,4 +62,31 @@ class Microphone{
 
 };
 
+class PhotoResistor{
+
+  public:
+
+    //constructor
+    PhotoResistor(int pinNum);
+
+    //destructor
+    ~PhotoResistor();
+
+    //public member functions
+    void init();
+    uint16_t getReading();
+    uint16_t sample();
+
+    //public member variables
+
+  private:
+
+    //private member functions
+
+    //private member variables
+    int pinNum_;
+    int reading_;
+
+};
+
 #endif

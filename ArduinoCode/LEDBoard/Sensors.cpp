@@ -61,5 +61,32 @@ uint16_t Microphone::sample(){
   return reading_;
 }
 
+PhotoResistor::PhotoResistor(int pinNum){
+
+  pinNum_ = pinNum;
+
+}
+
+PhotoResistor::~PhotoResistor(){
+
+}
+
+void PhotoResistor::init(){
+
+  pinMode(pinNum_, INPUT);
+  this->sample();
+}
+
+uint16_t PhotoResistor::getReading(){
+
+  return reading_;
+}
+
+uint16_t PhotoResistor::sample(){
+
+  reading_ = analogRead(pinNum_);
+  return reading_;
+}
+
 
 #endif

@@ -167,6 +167,7 @@ void modeControl(int mode){
     {
       sampleSwitches();
       sampleMics();
+      samplePhotoRes();
       delay(500);
     }
 

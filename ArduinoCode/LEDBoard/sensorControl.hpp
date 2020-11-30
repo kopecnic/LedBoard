@@ -24,7 +24,10 @@ SwitchInput switch6(33);
 Microphone mic0(A9);
 Microphone mic1(A8);
 
+PhotoResistor photoRes(A7);
+
 void sensorsInit(){
+
   switch0.init();
   switch1.init();
   switch2.init();
@@ -32,8 +35,11 @@ void sensorsInit(){
   switch4.init();
   switch5.init();
   switch6.init();
+
   mic0.init();
   mic1.init();
+
+  photoRes.init();
 }
 
 void sampleSwitches(){
@@ -81,6 +87,19 @@ void sampleMics(){
     Serial.println();
   }
 
+}
+
+void samplePhotoRes(){
+
+  photoRes.sample();
+
+
+  if(PHOTORES_DEBUG){
+    Serial.println();
+    Serial.print("(samplePhotoRes) photoRes: ");
+    Serial.println(photoRes.getReading());
+    Serial.println();
+  }
 
 }
 
