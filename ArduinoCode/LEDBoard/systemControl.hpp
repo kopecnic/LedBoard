@@ -29,6 +29,9 @@ void systemInit(){
   //initialize the led array
   ledArrayInit(ledArray);
 
+  //initialize the sensors
+  sensorsInit();
+
   //initialize communications with the sd card
   sdCardInit();
 
@@ -158,6 +161,13 @@ void modeControl(int mode){
       // delay(5);
       spectrumAnalyzerRun(ledArray);
       delay(10);
+    }
+
+    case 6:
+    {
+      sampleSwitches();
+      sampleMics();
+      delay(500);
     }
 
     //off

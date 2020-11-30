@@ -3,6 +3,8 @@
 #include "sdCardControl.hpp"
 #include "animationControl.hpp"
 #include "spectrumAnalyzer.hpp"
+#include "sensorControl.hpp"
+
 #include "systemControl.hpp"
 
 
@@ -35,7 +37,7 @@ void loop() {
   // for(int i=0; i<2; i++){
   //   modeControl(3);
   // }
-  modeControl(5);
+  modeControl(6);
 
 
   // ledArray.setSolidColor(CRGB::White);
