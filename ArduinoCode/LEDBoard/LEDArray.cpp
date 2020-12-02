@@ -118,7 +118,7 @@ void LEDArray::updateOutputArray_(){
     for(int j = 0; j < numCols_; j++){
       pos = (i * numCols_) + j;
       ledOutputArray_[pos] = ledInputArray[i][j];
-      //ledOutputArray_[pos] %= 50;
+      ledOutputArray_[pos] %= 50;
     }
   }
 }

@@ -155,19 +155,20 @@ void modeControl(int mode){
       break;
     }
 
+    //run the spectrumAnalyzer
     case 5:
     {
-      // Serial.println(analogRead(A9));
-      // delay(5);
       spectrumAnalyzerRun(ledArray);
       delay(10);
     }
 
+    //sample all the sensors at 2 Hz
     case 6:
     {
       sampleSwitches();
       sampleMics();
       samplePhotoRes();
+      sampleDistances();
       delay(500);
     }
 

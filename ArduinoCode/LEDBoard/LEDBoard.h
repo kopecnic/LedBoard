@@ -16,16 +16,24 @@ TODO
 //when enabled, program will wait for serial connection to begin
 #define WAIT_FOR_SERIAL 0
 
-//when enabled, program with print SD debug messages to serial
+//when enabled, program will print SD debug messages to serial
 #define SD_DEBUG 0
 
+//when enabled, program will print animation control debug messages to serial
 #define ANIMATION_CONTROL_DEBUG 0
 
+//when enabled, program will print switch input readings
 #define SWITCH_DEBUG 1
 
+//when enabled, program will print mic input readings
 #define MIC_DEBUG 1
 
-#define PHOTORES_DEBUG 1 
+//when enabled, program will print photoresistor input readings
+#define PHOTORES_DEBUG 1
+
+//when enabled, program will print distance input readings
+#define DISTANCE_DEBUG 1
+
 
 //--------------------------------------------------------------------------------------
 //General Defines

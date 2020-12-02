@@ -89,4 +89,40 @@ uint16_t PhotoResistor::sample(){
 }
 
 
+
+MaxSonar::MaxSonar(int sensePinNum, int controlPinNum){
+
+  sensePinNum_ = sensePinNum;
+  controlPinNum_ = controlPinNum;
+
+}
+
+MaxSonar::~MaxSonar(){
+
+}
+
+void MaxSonar::init(){
+
+  pinMode(sensePinNum_, INPUT);
+  pinMode(controlPinNum_, OUTPUT);
+  digitalWrite(controlPinNum_, LOW);
+  this->sample();
+}
+
+uint16_t MaxSonar::getReadingIn(){
+
+  return reading_;
+}
+
+uint16_t MaxSonar::sample(){
+
+  digitalWrite(controlPinNum_, HIGH);
+  delayMicroseconds(20);
+  reading_ = analogRead(sensePinNum_);
+  digitalWrite(controlPinNum_, LOW);
+  reading_ *= 5;
+  return reading_;
+}
+
+
 #endif
