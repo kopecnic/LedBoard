@@ -24,45 +24,11 @@ void setup() {
 
   systemInit();
 
-  spectrumAnalyzerInit();
-
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-  // for(int i=0; i<1; i++){
-  //   modeControl(2);
-  // }
-  // for(int i=0; i<2; i++){
-  //   modeControl(3);
-  // }
   modeControl(6);
-
-
-  // ledArray.setSolidColor(CRGB::White);
-  // ledArray.updateArray();
-  //
-  // delay(1000);
-  //
-  // ledArray.setSolidColor(CRGB::Red);
-  // ledArray.updateArray();
-  //
-  // delay(1000);
-  //
-  // ledArray.setSolidColor(CRGB::Green);
-  // ledArray.updateArray();
-  //
-  // delay(1000);
-  //
-  // ledArray.setSolidColor(CRGB::Blue);
-  // ledArray.updateArray();
-  //
-  // delay(1000);
-  //
-  // ledArray.setSolidColor(CRGB::Black);
-  // ledArray.updateArray();
-  //
-  // delay(1000);
 
 }

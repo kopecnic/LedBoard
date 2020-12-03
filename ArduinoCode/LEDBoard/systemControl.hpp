@@ -38,9 +38,14 @@ void systemInit(){
   //get animation file names
   animationGetAnimations(animationInFileName);
 
+  //load an animation
   animationLoadAnimation(animation, 0);
 
+  //set the animation brightness
   animation.setBrightness(100);
+
+  //initialize the spectrumAnalyzer
+  spectrumAnalyzerInit();
 }
 
 

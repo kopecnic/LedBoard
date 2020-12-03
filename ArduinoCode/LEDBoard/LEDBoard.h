@@ -76,6 +76,11 @@ TODO
 //number of leds that are attatched to each port
 #define LEDS_PER_DATA_PIN 5
 
+//defines how the LEDs data lines are connected
+//0 - Linear
+//1 - Alternating
+#define LED_DATA_CONNECTION_TYPE 1 
+
 //--------------------------------------------------------------------------------------
 //Animation Control Defines
 //--------------------------------------------------------------------------------------

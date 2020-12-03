@@ -97,14 +97,13 @@ void LEDArray::setSolidColor(CRGB color){
 
 
 
-//turns off all leds
+//set all elements in the array to black
 void LEDArray::clearArray(){
   for(int i = 0; i < numRows_; i++){
     for(int j = 0; j < numCols_; j++){
       ledInputArray[i][j] = CRGB::Black;
     }
   }
-  //this->updateArray();
 }
 
 
@@ -114,13 +113,28 @@ void LEDArray::updateOutputArray_(){
 
  int pos;
 
-  for(int i = 0; i < numRows_; i++){
-    for(int j = 0; j < numCols_; j++){
-      pos = (i * numCols_) + j;
-      ledOutputArray_[pos] = ledInputArray[i][j];
-      ledOutputArray_[pos] %= 50;
-    }
-  }
+ if(LED_DATA_CONNECTION_TYPE == 0){
+   for(int i = 0; i < numRows_; i++){
+     for(int j = 0; j < numCols_; j++){
+       pos = (i * numCols_) + j;
+       ledOutputArray_[pos] = ledInputArray[i][j];
+       ledOutputArray_[pos] %= 50;
+     }
+   }
+ }
+
+ else if(LED_DATA_CONNECTION_TYPE == 1){
+
+   //EDIT THIS CODE FOR ALTERNATING DATA LINES--------------------------------------------------------------------------
+   for(int i = 0; i < numRows_; i++){
+     for(int j = 0; j < numCols_; j++){
+       pos = (i * numCols_) + j;
+       ledOutputArray_[pos] = ledInputArray[i][j];
+       ledOutputArray_[pos] %= 50;
+     }
+   }
+ }
+
 }
 
 
