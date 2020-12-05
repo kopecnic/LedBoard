@@ -29,15 +29,23 @@ void systemInit(){
   //initialize the led array
   ledArrayInit(ledArray);
 
+  //initialize the sensors
+  sensorsInit();
+
   //initialize communications with the sd card
   sdCardInit();
 
   //get animation file names
   animationGetAnimations(animationInFileName);
 
+  //load an animation
   animationLoadAnimation(animation, 0);
 
+  //set the animation brightness
   animation.setBrightness(100);
+
+  //initialize the spectrumAnalyzer
+  spectrumAnalyzerInit();
 }
 
 
@@ -152,12 +160,21 @@ void modeControl(int mode){
       break;
     }
 
+    //run the spectrumAnalyzer
     case 5:
     {
-      // Serial.println(analogRead(A9));
-      // delay(5);
       spectrumAnalyzerRun(ledArray);
       delay(10);
+    }
+
+    //sample all the sensors at 2 Hz
+    case 6:
+    {
+      sampleSwitches();
+      sampleMics();
+      samplePhotoRes();
+      sampleDistances();
+      delay(500);
     }
 
     //off
