@@ -161,36 +161,64 @@ void sdGetAnimation(LEDAnimation &animation, char* animationFileName){
     animation.setRefreshRate(refreshRate);
     animation.setNumFrames(numFrames);
 
+    char input;
+    //char inputBuff[8];
+
     //read each frame in the file pixle by pixle and store it in the animation's storage array
     for(int i = 0; i < numFrames; i++){
 
       //read frame number line
-      inFile.readStringUntil('\n');
+      Serial.println(inFile.readStringUntil('\n'));
 
       //read each row in the frame
       for(int j = 0; j < numRows; j++){
 
-        //store the read line into a buffer
-        buffer = inFile.readStringUntil('\n');
+        // //store the read line into a buffer
+        // buffer = inFile.readStringUntil('\n');
 
         for(int k = 0; k < numCols; k++){
 
-          //find the end of one pixel entry
-          linePos = buffer.indexOf(",");
+            buffer = "";
 
-          //buffer to store char array version of the pixle value
-          char charBuffer[linePos+1];
+            buffer = inFile.readStringUntil(',');
 
-          //store a pixle value in the char buffer
-          buffer.substring(0, linePos).toCharArray(charBuffer, linePos+1);
+            // Serial.print(buffer);
+            // Serial.print(" ");
+              // buffer to store char array version of the pixle value
+            char charBuffer[9];
 
-          //add the pixle to the animation storage array
-          animation.addPixle(i, j, k, strtol(charBuffer, NULL, 16));
+            //store a pixle value in the char buffer
+            buffer.toCharArray(charBuffer, 9);
 
-          //remove the pixle from the line buffer
-          buffer = buffer.substring(linePos + 1, buffer.length());
+            Serial.println(charBuffer);
+            //Serial.print(" ");
+
+            //add the pixle to the animation storage array
+            animation.addPixle(i, j, k, strtol(charBuffer, NULL, 16));
         }
-      }
+
+        inFile.read();
+
+        // Serial.println(buffer);
+        //
+        // for(int k = 0; k < numCols; k++){
+        //
+        //   //find the end of one pixel entry
+        //   linePos = buffer.indexOf(",");
+        //
+        //   //buffer to store char array version of the pixle value
+        //   char charBuffer[linePos+1];
+        //
+        //   //store a pixle value in the char buffer
+        //   buffer.substring(0, linePos).toCharArray(charBuffer, linePos+1);
+        //
+        //   //add the pixle to the animation storage array
+        //   animation.addPixle(i, j, k, strtol(charBuffer, NULL, 16));
+        //
+        //   //remove the pixle from the line buffer
+        //   buffer = buffer.substring(linePos + 1, buffer.length());
+        // }
+        }
     }
 
     // close the file:

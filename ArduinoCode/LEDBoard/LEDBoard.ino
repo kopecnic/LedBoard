@@ -1,9 +1,9 @@
 #include "LEDBoard.h"
+#include "sensorControl.hpp"
 #include "ledArrayControl.hpp"
 #include "sdCardControl.hpp"
 #include "animationControl.hpp"
 #include "spectrumAnalyzer.hpp"
-#include "sensorControl.hpp"
 
 #include "systemControl.hpp"
 
@@ -29,6 +29,6 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  modeControl(6);
+  modeControl(8);
 
 }

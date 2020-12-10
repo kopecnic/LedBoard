@@ -128,9 +128,17 @@ void LEDArray::updateOutputArray_(){
    //EDIT THIS CODE FOR ALTERNATING DATA LINES--------------------------------------------------------------------------
    for(int i = 0; i < numRows_; i++){
      for(int j = 0; j < numCols_; j++){
+
        pos = (i * numCols_) + j;
-       ledOutputArray_[pos] = ledInputArray[i][j];
-       ledOutputArray_[pos] %= 50;
+
+       if( ((i % 2 == 0) && ((i/5)%2 == 0)) || ((i % 2 == 1) && ((i/5)%2 == 1)) ){
+         ledOutputArray_[pos] = ledInputArray[i][j];
+         //ledOutputArray_[pos] %= 50;
+       }
+       else{
+         ledOutputArray_[pos] = ledInputArray[i][numCols_ - 1 - j];
+         //ledOutputArray_[pos] %= 50;
+       }
      }
    }
  }

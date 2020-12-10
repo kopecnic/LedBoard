@@ -165,6 +165,7 @@ void modeControl(int mode){
     {
       spectrumAnalyzerRun(ledArray);
       delay(10);
+      break;
     }
 
     //sample all the sensors at 2 Hz
@@ -175,11 +176,54 @@ void modeControl(int mode){
       samplePhotoRes();
       sampleDistances();
       delay(500);
+      break;
+    }
+
+    case 7:
+    {
+      for(int i=0; i<LED_ARRAY_NUM_COLS; i++){
+        ledArray.ledInputArray[i][0] = CRGB::Green;
+        ledArray.updateArray();
+        delay(100);
+      }
+      ledArray.clearArray();
+      ledArray.updateArray();
+      break;
+    }
+
+    case 8:{
+
+      int dist = distance0.sample();
+      int intensity = map(dist, 300, 4000, 0, 1000);
+      int ledVal = int(255*30*intensity/1000);
+      //ledVal = 110*5;
+      for(int j = 0; j < 30; j++){
+
+        int val = 0;
+
+        if(ledVal - 255 > 0){
+          val = 255;
+          ledVal -= 255;
+        }
+        else{
+          val = ledVal;
+          ledVal = 0;
+        }
+
+
+
+        ledArray.ledInputArray[0][j] = val;
+      }
+
+      ledArray.updateArray();
+
+      break;
     }
 
     //off
     default:
       ledArray.clearArray();
+      ledArray.updateArray();
       break;
   }
 }

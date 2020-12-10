@@ -13,7 +13,7 @@
 
 int SAMPLE_RATE_HZ = 20000;             // Sample rate of the audio in hertz.
 float SPECTRUM_MIN_DB = 40.0;          // Audio intensity (in decibels) that maps to low LED brightness.
-float SPECTRUM_MAX_DB = 80.0;          // Audio intensity (in decibels) that maps to high LED brightness.
+float SPECTRUM_MAX_DB = 70.0;          // Audio intensity (in decibels) that maps to high LED brightness.
 int LEDS_ENABLED = 1;                  // Control if the LED's should display the spectrum or not.  1 is true, 0 is false.
                                        // Useful for turning the LED display on and off with commands from the serial port.
 const int FFT_SIZE = 256;              // Size of the FFT.  Realistically can only be at most 256
@@ -22,7 +22,7 @@ const int AUDIO_INPUT_PIN = A9;        // Input ADC pin for audio data.
 const int ANALOG_READ_RESOLUTION = 10; // Bits of resolution for the ADC.
 const int ANALOG_READ_AVERAGING = 1;  // Number of samples to average with each ADC reading.
 const int NEO_PIXEL_PIN = 1;           // Output pin for neo pixels.
-const int NEO_PIXEL_COUNT = 5;         // Number of neo pixels.  You should be able to increase this without
+const int NEO_PIXEL_COUNT = 30;         // Number of neo pixels.  You should be able to increase this without
                                        // any other changes to the program.
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -80,11 +80,37 @@ void spectrumSetup() {
   //https://www.teachmeaudio.com/mixing/techniques/audio-spectrum
 
   frequencyWindow[0] = 100;
-  frequencyWindow[1] = 250;
-  frequencyWindow[2] = 500;
-  frequencyWindow[3] = 1000;
-  frequencyWindow[4] = 2000;
-  frequencyWindow[5] = 10000;
+  frequencyWindow[1] = 200;
+  frequencyWindow[2] = 300;
+  frequencyWindow[3] = 400;
+  frequencyWindow[4] = 500;
+  frequencyWindow[5] = 600;
+  frequencyWindow[6] = 700;
+  frequencyWindow[7] = 800;
+  frequencyWindow[8] = 900;
+  frequencyWindow[9] = 1000;
+  frequencyWindow[10] = 1500;
+  frequencyWindow[11] = 2000;
+  frequencyWindow[12] = 2500;
+  frequencyWindow[13] = 3000;
+  frequencyWindow[14] = 3500;
+  frequencyWindow[15] = 4000;
+  frequencyWindow[16] = 4500;
+  frequencyWindow[17] = 4600;
+  frequencyWindow[18] = 4700;
+  frequencyWindow[19] = 4800;
+  frequencyWindow[20] = 5000;
+  frequencyWindow[21] = 5500;
+  frequencyWindow[22] = 6000;
+  frequencyWindow[23] = 6500;
+  frequencyWindow[24] = 7000;
+  frequencyWindow[25] = 7500;
+  frequencyWindow[26] = 8000;
+  frequencyWindow[27] = 8500;
+  frequencyWindow[28] = 9000;
+  frequencyWindow[29] = 9500;
+  frequencyWindow[30] = 10000;
+
 }
 
 void spectrumLoop(LEDArray &ledArray) {
@@ -105,9 +131,9 @@ void spectrumLoop(LEDArray &ledArray) {
     //pixels.setPixelColor(i, pixelHSVtoRGBColor(hues[i], 1.0, intensity));
     //pixels.setPixelColor(i, pixels.Color(int(255*intensity), int(0), int(0)));
 
-    int ledVal = int(255*5*intensity);
+    int ledVal = int(255*30*intensity);
     //ledVal = 110*5;
-    for(int j = 0; j < 5; j++){
+    for(int j = 0; j < 30; j++){
 
       int val = 0;
 
@@ -142,6 +168,7 @@ void spectrumLoop(LEDArray &ledArray) {
 
 void samplingCallback() {
   // Read from the ADC and store the sample data
+  samples[sampleCounter] = (float32_t)mic0.sample();
   samples[sampleCounter] = (float32_t)analogRead(AUDIO_INPUT_PIN);
   // Complex FFT functions require a coefficient for the imaginary part of the input.
   // Since we only have real data, set this coefficient to zero.

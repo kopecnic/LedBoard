@@ -14,13 +14,13 @@ TODO
 //--------------------------------------------------------------------------------------
 
 //when enabled, program will wait for serial connection to begin
-#define WAIT_FOR_SERIAL 0
+#define WAIT_FOR_SERIAL 1
 
 //when enabled, program will print SD debug messages to serial
-#define SD_DEBUG 0
+#define SD_DEBUG 1
 
 //when enabled, program will print animation control debug messages to serial
-#define ANIMATION_CONTROL_DEBUG 0
+#define ANIMATION_CONTROL_DEBUG 1
 
 //when enabled, program will print switch input readings
 #define SWITCH_DEBUG 1
@@ -79,17 +79,17 @@ TODO
 //defines how the LEDs data lines are connected
 //0 - Linear
 //1 - Alternating
-#define LED_DATA_CONNECTION_TYPE 1 
+#define LED_DATA_CONNECTION_TYPE 1
 
 //--------------------------------------------------------------------------------------
 //Animation Control Defines
 //--------------------------------------------------------------------------------------
 
 //number of frames in the largest animation
-#define ANIMATION_NUM_MAX_FRAMES 10
+#define ANIMATION_NUM_MAX_FRAMES 100
 
 //max number of animation files
-#define ANIMATION_NUM_MAX_ANIMATIONS 10
+#define ANIMATION_NUM_MAX_ANIMATIONS 5
 
 //--------------------------------------------------------------------------------------
 //

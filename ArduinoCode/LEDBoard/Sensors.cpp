@@ -121,6 +121,7 @@ uint16_t MaxSonar::sample(){
   reading_ = analogRead(sensePinNum_);
   digitalWrite(controlPinNum_, LOW);
   reading_ *= 5;
+  Serial.println(reading_);
   return reading_;
 }
 
