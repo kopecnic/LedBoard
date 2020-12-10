@@ -48,6 +48,10 @@ TODO
 //number of total leds in the array
 #define LED_ARRAY_NUM_LEDS 900
 
+//base brightness of the LED array
+//Note brightness percentage = BASE_LED_BRIGHTNESS/256
+#define BASE_LED_BRIGHTNESS 128
+
 //--------------------------------------------------------------------------------------
 //LEDArray Defines
 //--------------------------------------------------------------------------------------

@@ -182,7 +182,7 @@ void modeControl(int mode){
     case 7:
     {
       for(int i=0; i<LED_ARRAY_NUM_COLS; i++){
-        ledArray.ledInputArray[i][0] = CRGB::Green;
+        ledArray.ledInputArray[0][i] = CRGB::Green;
         ledArray.updateArray();
         delay(100);
       }

@@ -4,6 +4,12 @@
 #include "Arduino.h"
 #include "LEDArray.h"
 
+/* TODO
+* -fix hardcoded numbers in updateOutputArray_()
+*
+*
+*/
+
 
 
 LEDArray::LEDArray(int numCols, int numRows, int numPorts, int ledsPerPort){
@@ -125,22 +131,43 @@ void LEDArray::updateOutputArray_(){
 
  else if(LED_DATA_CONNECTION_TYPE == 1){
 
-   //EDIT THIS CODE FOR ALTERNATING DATA LINES--------------------------------------------------------------------------
-   for(int i = 0; i < numRows_; i++){
-     for(int j = 0; j < numCols_; j++){
+   if(ARRAY_ORENTATION == 0){
+     for(int i = 0; i < numRows_; i++){
+       for(int j = 0; j < numCols_; j++){
 
-       pos = (i * numCols_) + j;
-
-       if( ((i % 2 == 0) && ((i/5)%2 == 0)) || ((i % 2 == 1) && ((i/5)%2 == 1)) ){
-         ledOutputArray_[pos] = ledInputArray[i][j];
-         //ledOutputArray_[pos] %= 50;
-       }
-       else{
-         ledOutputArray_[pos] = ledInputArray[i][numCols_ - 1 - j];
-         //ledOutputArray_[pos] %= 50;
+         if( ((j % 2 == 0) && ((j/5)%2 == 0)) || ((j % 2 == 1) && ((j/5)%2 == 1)) ){
+           pos = (numRows_ * j) + (numRows_ - i) - 1;
+           ledOutputArray_[pos] = ledInputArray[i][j];
+           ledOutputArray_[pos] %= BASE_LED_BRIGHTNESS;
+         }
+         else{
+           pos = (j * numRows_) + i;
+           ledOutputArray_[pos] = ledInputArray[i][j];
+           ledOutputArray_[pos] %= BASE_LED_BRIGHTNESS;
+         }
        }
      }
    }
+
+   else if(ARRAY_ORENTATION == 1){
+
+     for(int i = 0; i < numRows_; i++){
+       for(int j = 0; j < numCols_; j++){
+
+         pos = (i * numCols_) + j;
+
+         if( ((i % 2 == 0) && ((i/5)%2 == 0)) || ((i % 2 == 1) && ((i/5)%2 == 1)) ){
+           ledOutputArray_[pos] = ledInputArray[i][j];
+           ledOutputArray_[pos] %= BASE_LED_BRIGHTNESS;
+         }
+         else{
+           ledOutputArray_[pos] = ledInputArray[i][numCols_ - 1 - j];
+           ledOutputArray_[pos] %= BASE_LED_BRIGHTNESS;
+         }
+       }
+     }
+   }
+
  }
 
 }
