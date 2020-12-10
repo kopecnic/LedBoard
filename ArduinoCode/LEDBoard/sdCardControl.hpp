@@ -161,7 +161,7 @@ void sdGetAnimation(LEDAnimation &animation, char* animationFileName){
     animation.setRefreshRate(refreshRate);
     animation.setNumFrames(numFrames);
 
-    char input;
+    //char input;
     //char inputBuff[8];
 
     //read each frame in the file pixle by pixle and store it in the animation's storage array
@@ -195,8 +195,10 @@ void sdGetAnimation(LEDAnimation &animation, char* animationFileName){
 
             //add the pixle to the animation storage array
             animation.addPixle(i, j, k, strtol(charBuffer, NULL, 16));
+
         }
 
+        inFile.read();
         inFile.read();
 
         // Serial.println(buffer);

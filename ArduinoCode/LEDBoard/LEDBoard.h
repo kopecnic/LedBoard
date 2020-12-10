@@ -14,7 +14,7 @@ TODO
 //--------------------------------------------------------------------------------------
 
 //when enabled, program will wait for serial connection to begin
-#define WAIT_FOR_SERIAL 1
+#define WAIT_FOR_SERIAL 0
 
 //when enabled, program will print SD debug messages to serial
 #define SD_DEBUG 1
@@ -80,6 +80,11 @@ TODO
 //0 - Linear
 //1 - Alternating
 #define LED_DATA_CONNECTION_TYPE 1
+
+//orentation of the display
+//0 - Normal
+//1 - -90deg
+#define ARRAY_ORENTATION 0
 
 //--------------------------------------------------------------------------------------
 //Animation Control Defines
