@@ -4,7 +4,6 @@
 /*
 TODO
 -modify sdGetAnimation() to accept a file name input
--add function to read file containing names of each animation
 */
 
 #include <EasyTimer.h>

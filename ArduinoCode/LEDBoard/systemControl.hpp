@@ -20,7 +20,7 @@ char animationInFileName[] = "aniName.txt";
 LEDAnimation animation(LED_ARRAY_NUM_ROWS, LED_ARRAY_NUM_COLS, ANIMATION_NUM_MAX_FRAMES);
 
 //stores all the data relative to the led array
-LEDArray ledArray(LED_ARRAY_NUM_COLS, LED_ARRAY_NUM_ROWS, NUM_DATA_PINS, LEDS_PER_DATA_PIN);
+LEDArray ledArray(LED_ARRAY_NUM_COLS, LED_ARRAY_NUM_ROWS, NUM_DATA_PINS, LEDS_PER_DATA_PIN, BASE_LED_BRIGHTNESS);
 
 
 //initialize all components on the system

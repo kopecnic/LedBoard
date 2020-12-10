@@ -12,13 +12,14 @@
 
 
 
-LEDArray::LEDArray(int numCols, int numRows, int numPorts, int ledsPerPort){
+LEDArray::LEDArray(int numCols, int numRows, int numPorts, int ledsPerPort, int brightness){
 
   numRows_ = numRows;
   numCols_ = numCols;
   numPorts_ = numPorts;
   ledsPerPort_ = ledsPerPort;
   numLeds_ = numRows_ * numCols_;
+  brightness_ = brightness;
 
 }
 
@@ -124,7 +125,7 @@ void LEDArray::updateOutputArray_(){
      for(int j = 0; j < numCols_; j++){
        pos = (i * numCols_) + j;
        ledOutputArray_[pos] = ledInputArray[i][j];
-       ledOutputArray_[pos] %= 50;
+       ledOutputArray_[pos] %= brightness_;
      }
    }
  }
@@ -137,14 +138,12 @@ void LEDArray::updateOutputArray_(){
 
          if( ((j % 2 == 0) && ((j/5)%2 == 0)) || ((j % 2 == 1) && ((j/5)%2 == 1)) ){
            pos = (numRows_ * j) + (numRows_ - i) - 1;
-           ledOutputArray_[pos] = ledInputArray[i][j];
-           ledOutputArray_[pos] %= BASE_LED_BRIGHTNESS;
          }
          else{
            pos = (j * numRows_) + i;
-           ledOutputArray_[pos] = ledInputArray[i][j];
-           ledOutputArray_[pos] %= BASE_LED_BRIGHTNESS;
          }
+         ledOutputArray_[pos] = ledInputArray[i][j];
+         ledOutputArray_[pos] %= brightness_;
        }
      }
    }
@@ -158,11 +157,11 @@ void LEDArray::updateOutputArray_(){
 
          if( ((i % 2 == 0) && ((i/5)%2 == 0)) || ((i % 2 == 1) && ((i/5)%2 == 1)) ){
            ledOutputArray_[pos] = ledInputArray[i][j];
-           ledOutputArray_[pos] %= BASE_LED_BRIGHTNESS;
+           ledOutputArray_[pos] %= brightness_;
          }
          else{
            ledOutputArray_[pos] = ledInputArray[i][numCols_ - 1 - j];
-           ledOutputArray_[pos] %= BASE_LED_BRIGHTNESS;
+           ledOutputArray_[pos] %= brightness_;
          }
        }
      }
