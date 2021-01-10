@@ -48,7 +48,7 @@ TODO
 #define LED_ARRAY_NUM_LEDS 900
 
 //base brightness of the LED array
-//Note brightness percentage = BASE_LED_BRIGHTNESS/256
+//0 = Dimmest, 255 = Brightest
 #define BASE_LED_BRIGHTNESS 128
 
 //--------------------------------------------------------------------------------------

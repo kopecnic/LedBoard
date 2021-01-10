@@ -29,6 +29,8 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  modeControl(1);
+  Serial.println(getSubMode());
+  modeControl(getMode(), getSubMode());
+  //delay(100);
 
 }
