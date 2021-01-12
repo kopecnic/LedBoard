@@ -1,3 +1,5 @@
+//changing the order of these includes may cause issues as some use classes that
+//are defined in others
 #include "LEDBoard.h"
 #include "sensorControl.hpp"
 #include "ledArrayControl.hpp"
