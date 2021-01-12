@@ -20,7 +20,7 @@ const int FFT_SIZE = 256;              // Size of the FFT.  Realistically can on
                                        // without running out of memory for buffers and other state.
 const int AUDIO_INPUT_PIN = A9;        // Input ADC pin for audio data.
 const int ANALOG_READ_RESOLUTION = 10; // Bits of resolution for the ADC.
-const int ANALOG_READ_AVERAGING = 1;  // Number of samples to average with each ADC reading.
+const int ANALOG_READ_AVERAGING = 2;  // Number of samples to average with each ADC reading.
 const int NEO_PIXEL_PIN = 1;           // Output pin for neo pixels.
 const int NEO_PIXEL_COUNT = 30;         // Number of neo pixels.  You should be able to increase this without
                                        // any other changes to the program.
@@ -148,7 +148,7 @@ void spectrumLoop(LEDArray &ledArray) {
 
 
 
-      ledArray.ledInputArray[i][j] = val;
+      ledArray.ledInputArray[30-j-1][i] = val;
     }
 
     // Serial.print(i);

@@ -17,7 +17,7 @@ class LEDArray{
   public:
 
     //constructor
-    LEDArray(int numCols, int numRows, int numPorts, int ledsPerPort);
+    LEDArray(int numCols, int numRows, int numPorts, int ledsPerPort, int brightness);
 
     //destructor
     ~LEDArray();
@@ -45,6 +45,7 @@ class LEDArray{
     int numPorts_;
     int ledsPerPort_;
     int numLeds_;
+    int brightness_;
     CRGB ledOutputArray_[LED_ARRAY_NUM_LEDS];
 
 

@@ -91,6 +91,12 @@ void sampleSwitches(){
   }
 }
 
+int getModeFromSwitches(SwitchInput &switch0, SwitchInput &switch1){
+  switch0.sample();
+  switch1.sample();
+  return ((int)switch1.getState() << 1) | (int)switch0.getState();
+}
+
 //samples the mics and prints their readings if the debug is enabled
 void sampleMics(){
 

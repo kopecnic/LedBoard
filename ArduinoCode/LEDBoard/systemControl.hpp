@@ -20,7 +20,7 @@ char animationInFileName[] = "aniName.txt";
 LEDAnimation animation(LED_ARRAY_NUM_ROWS, LED_ARRAY_NUM_COLS, ANIMATION_NUM_MAX_FRAMES);
 
 //stores all the data relative to the led array
-LEDArray ledArray(LED_ARRAY_NUM_COLS, LED_ARRAY_NUM_ROWS, NUM_DATA_PINS, LEDS_PER_DATA_PIN);
+LEDArray ledArray(LED_ARRAY_NUM_COLS, LED_ARRAY_NUM_ROWS, NUM_DATA_PINS, LEDS_PER_DATA_PIN, BASE_LED_BRIGHTNESS);
 
 
 //initialize all components on the system
@@ -48,17 +48,53 @@ void systemInit(){
   spectrumAnalyzerInit();
 }
 
+int getMode(){
+    return getModeFromSwitches(switch0, switch1);
+}
 
+int getSubMode(){
+  return getModeFromSwitches(switch2, switch3);
+}
 
 //determine what mode to run in
-void modeControl(int mode){
+void modeControl(int mode, int subMode){
 
   switch(mode){
 
     //off
     case 0:
     {
-      ledArray.clearArray();
+      switch(subMode){
+
+        case 0:
+        {
+          ledArray.clearArray();
+          break;
+        }
+
+        case 1:
+        {
+          ledArray.setSolidColor(CRGB::Red);
+          break;
+        }
+
+        case 2:
+        {
+          ledArray.setSolidColor(CRGB::Green);
+          break;
+        }
+
+        case 3:
+        {
+          ledArray.setSolidColor(CRGB::Blue);
+          break;
+        }
+
+        default:
+          ledArray.clearArray();
+          break;
+      }
+      ledArray.updateArray();
       break;
     }
     case 1:
@@ -164,7 +200,7 @@ void modeControl(int mode){
     case 5:
     {
       spectrumAnalyzerRun(ledArray);
-      delay(10);
+      delay(20);
       break;
     }
 
@@ -194,7 +230,7 @@ void modeControl(int mode){
     case 8:{
 
       int dist = distance0.sample();
-      int intensity = map(dist, 300, 4000, 0, 1000);
+      int intensity = map(dist, 200, 4000, 0, 1000);
       int ledVal = int(255*30*intensity/1000);
       //ledVal = 110*5;
       for(int j = 0; j < 30; j++){
@@ -212,7 +248,7 @@ void modeControl(int mode){
 
 
 
-        ledArray.ledInputArray[0][j] = val;
+        ledArray.ledInputArray[30-j-1][0] = val;
       }
 
       ledArray.updateArray();
