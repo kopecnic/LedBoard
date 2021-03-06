@@ -25,13 +25,16 @@ SwitchInput switch6(33);
 Microphone mic0(A9);
 Microphone mic1(A8);
 
+//filtering factor for the light sensor
+//y[n] = y[n-1] + a(x[n] - y[n-1]); a = 2^(-LIGHTSENSORFILTERFACTOR)
+#define LIGHTSENSORFILTERFACTOR 3
+
 //the photoresistor
-PhotoResistor photoRes(A7);
+PhotoResistor photoRes(A7, LIGHTSENSORFILTERFACTOR);
 
 //the sonar sensors
 MaxSonar distance0(A13, 29);
 MaxSonar distance1(A12, 28);
-
 
 //initializes all the sensors by calling their init functions
 void sensorsInit(){
@@ -119,11 +122,12 @@ void samplePhotoRes(){
 
   photoRes.sample();
 
-
   if(PHOTORES_DEBUG){
     Serial.println();
     Serial.print("(samplePhotoRes) photoRes: ");
     Serial.println(photoRes.getReading());
+    Serial.print("(samplePhotoRes) photoResAverage: ");
+    Serial.println(photoRes.getAverage());
     Serial.println();
   }
 
@@ -146,6 +150,5 @@ void sampleDistances(){
   }
 
 }
-
 
 #endif

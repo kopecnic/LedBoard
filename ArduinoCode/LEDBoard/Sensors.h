@@ -67,7 +67,7 @@ class PhotoResistor{
   public:
 
     //constructor
-    PhotoResistor(int pinNum);
+    PhotoResistor(int pinNum, int filterAlpha);
 
     //destructor
     ~PhotoResistor();
@@ -76,6 +76,8 @@ class PhotoResistor{
     void init();
     uint16_t getReading();
     uint16_t sample();
+    uint16_t getAverage();
+    void setFilterAlpha(int alpha);
 
     //public member variables
 
@@ -86,6 +88,8 @@ class PhotoResistor{
     //private member variables
     int pinNum_;
     int reading_;
+    int average_;
+    int filterAlpha_;
 
 };
 

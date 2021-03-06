@@ -1,5 +1,6 @@
 //changing the order of these includes may cause issues as some use classes that
 //are defined in others
+
 #include "LEDBoard.h"
 #include "sensorControl.hpp"
 #include "ledArrayControl.hpp"
@@ -16,7 +17,6 @@ void setup() {
 
   Serial.begin(115200);
 
-  //analogReadResolution(12);
 
   if(WAIT_FOR_SERIAL){
     while (!Serial) {
@@ -31,8 +31,8 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  Serial.println(getSubMode());
+  //run the mode baised on the current mode and sub mode
   modeControl(getMode(), getSubMode());
-  //delay(100);
+
 
 }

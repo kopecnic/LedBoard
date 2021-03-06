@@ -61,9 +61,13 @@ uint16_t Microphone::sample(){
   return reading_;
 }
 
-PhotoResistor::PhotoResistor(int pinNum){
+PhotoResistor::PhotoResistor(int pinNum, int filterAlpha) {
 
+  average_ = 0;
   pinNum_ = pinNum;
+  reading_ = this->sample();
+  filterAlpha_ = pow(2, -filterAlpha);
+  average_ = reading_;
 
 }
 
@@ -85,7 +89,21 @@ uint16_t PhotoResistor::getReading(){
 uint16_t PhotoResistor::sample(){
 
   reading_ = analogRead(pinNum_);
+
+  //y[n] = y[n-1] + a(x[n] - y[n-1])
+  average_ = average_ + this->filterAlpha_ * (this->reading_ - this->average_);
+
   return reading_;
+}
+
+uint16_t PhotoResistor::getAverage()
+{
+	return average_;
+}
+
+void PhotoResistor::setFilterAlpha(int filterAlpha)
+{
+	this->filterAlpha_ = filterAlpha_ = pow(2, -filterAlpha);
 }
 
 
