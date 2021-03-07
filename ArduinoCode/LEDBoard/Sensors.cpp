@@ -135,7 +135,7 @@ uint16_t MaxSonar::getReadingIn(){
 uint16_t MaxSonar::sample(){
 
   digitalWrite(controlPinNum_, HIGH);
-  delayMicroseconds(20);
+  delayMicroseconds(30);
   reading_ = analogRead(sensePinNum_);
   digitalWrite(controlPinNum_, LOW);
   reading_ *= 5;

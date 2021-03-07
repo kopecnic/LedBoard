@@ -32,7 +32,7 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   //run the mode baised on the current mode and sub mode
-  modeControl(getMode(), getSubMode());
-
+  //modeControl(getMode(), getSubMode());
+modeControl(3,0);
 
 }

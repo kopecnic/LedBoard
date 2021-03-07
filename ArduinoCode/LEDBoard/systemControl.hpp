@@ -7,6 +7,10 @@
 //
 //----------------------------------------------------------------------------------------------------------------------
 
+//TODO
+//-Remove constants from ultrasonic sensoring
+//-
+
 #ifndef SYSTEM_CONTROL_HPP
 #define SYSTEM_CONTROL_HPP
 
@@ -185,13 +189,14 @@ void modeControl(int mode, int subMode){
 
           break;
         }
-        
+
         //dual distance sensor readout
         case 1:
         {
+          delay(100);
           //light up the distance for the left side
           int dist = distance0.sample();
-          int intensity = map(dist, 200, 4000, 0, 1000);
+          int intensity = map(dist, 200, 3000, 0, 1000);
           int ledVal = int(255*30*intensity/1000);
           for(int j = 0; j < 30; j++){
 
@@ -210,7 +215,7 @@ void modeControl(int mode, int subMode){
 
           //light up the distance for the right side
           dist = distance1.sample();
-          intensity = map(dist, 200, 4000, 0, 1000);
+          intensity = map(dist, 200, 3000, 0, 1000);
           ledVal = int(255 * 30 * intensity / 1000);
           for (int j = 0; j < 30; j++) {
 
